@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! 🌸</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe5ec, #ffc2d1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* ပန်းပွင့်ကြွေတဲ့ Animation */
+        .petal {
+            position: absolute;
+            background-color: #ffb3c6;
+            border-radius: 150% 0 150% 150%;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Birthday Card Container */
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 30px 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.5);
+            text-align: center;
+            max-width: 380px;
+            width: 90%;
+            border: 2px solid #ffb3c6;
+            transition: all 0.5s ease-in-out;
+        }
+
+        /* Sakura Flower Frame */
+        .flower-frame {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #fff0f5;
+            border: 4px solid #ff758f;
+            box-shadow: 0 8px 20px rgba(255, 117, 143, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .message {
+            color: #4a3e3d;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease;
+        }
+
+        /* Button style */
+        .btn {
+            background: linear-gradient(45deg, #ff4d6d, #ff758f);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.6);
+        }
+
+        .step-indicator {
+            font-size: 0.85rem;
+            color: #ff758f;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="petals-container"></div>
+
+    <div class="card">
+        <div class="flower-frame">
+            <svg viewBox="0 0 100 100" width="100" height="100">
+                <g fill="#ffb3c6" stroke="#ff4d6d" stroke-width="1">
+                    <path d="M50 50 C40 20, 35 10, 50 5 C65 10, 60 20, 50 50 Z" />
+                    <path d="M50 50 C75 30, 85 30, 92 45 C88 60, 75 60, 50 50 Z" />
+                    <path d="M50 50 C70 70, 75 85, 62 93 C50 85, 52 72, 50 50 Z" />
+                    <path d="M50 50 C30 70, 25 85, 38 93 C50 85, 48 72, 50 50 Z" />
+                    <path d="M50 50 C25 30, 15 30, 8 45 C12 60, 25 60, 50 50 Z" />
+                </g>
+                <circle cx="50" cy="50" r="12" fill="#ff758f" opacity="0.6"/>
+                <circle cx="50" cy="50" r="6" fill="#ffe066" />
+                <path d="M50 50 L50 42 M50 50 L57 45 M50 50 L56 54 M50 50 L44 54 M50 50 L43 45" stroke="#ff4d6d" stroke-width="1.5" />
+            </svg>
+        </div>
+
+        <div class="message" id="text-box">
+            </div>
+
+        <button class="btn" onclick="nextPage()" id="next-btn">ဆက်ဖတ်ရန် နှိပ်ပါ 💖</button>
+        <div class="step-indicator" id="step-count">1 / 4</div>
+    </div>
+
+    <script>
+        // Falling petals script
+        const container = document.getElementById('petals-container');
+        for (let i = 0; i < 25; i++) {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = `${Math.random() * 100}vw`;
+            petal.style.width = `${Math.random() * 15 + 10}px`;
+            petal.style.height = `${Math.random() * 15 + 10}px`;
+            petal.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            petal.style.animationDelay = `${Math.random() * 5}s`;
+            container.appendChild(petal);
+        }
+
+        // Pages Data
+        const pages = [
+            "Happy Birthday ပါ ညီမရေ! 🎂✨<br><br>မွေးနေ့မှာ အရမ်းပျော်ဖို့ကောင်းပြီး လှပတဲ့နေ့လေး ဖြစ်ပါစေလို့ ဆုတောင်းပေးပါတယ်။ ဒါနဲ့... မွေးနေ့ဆုတောင်းတွေ ပြီးပြည့်စုံသွားအောင် တစ်နေ့တော့ အစ်ကို့ကို မုန့်လိုက်ဝယ်ကျွေးမယ် မလားဟင်? 😉 ပြင်ဆင်ထားလိုက်တော့နော်!",
+            
+            "ပြီးတော့... ညီမရဲ့မွေးနေ့လေးမှာ ပျော်ရွှင်ရအောင် ဖန်တီးပေးခွင့်ရှိတဲ့သူတွေထဲမှာ အစ်ကိုလည်း တစ်ယောက်အပါအဝင် ဖြစ်ချင်တယ်ဆိုတာ သိစေချင်လို့ပါ ဟဲဟဲ 💖",
+            
+            "တကယ်တော့ ညီမ မွေးနေ့အတွက် လက်ဆောင်က အဆင်သင့်ရှိပါတယ်။ ဒါပေမဲ့ အကောင်းဆုံးလက်ဆောင်က ခု ညီမနဲ့ စကားပြောနေတဲ့ 'အစ်ကို' ပဲထင်တယ် ဟဟ။ သီချင်းကောင်းကောင်းလေးတေ နားထောင်ရတယ် ဟုတ်? စတာပါ! ဒီနေ့လေးမှာ အပျော်ဆုံးဖြစ်ပါစေနော် 😁✨",
+            
+            "🌸 ဒီနေ့ကစပီး နာကျင်စရာမှန်သမျှ ဝေးကွာပြီး ပျော်ရွှင်စရာ၊ ကြည်နူးစရာနေ့ရက်တွေကိုပဲ ပိုင်ဆိုင်နိုင်ပါစေနော်! 🌹💖✨"
+        ];
+
+        let currentPage = 0;
+
+        function updateContent() {
+            const textBox = document.getElementById('text-box');
+            const stepCount = document.getElementById('step-count');
+            const nextBtn = document.getElementById('next-btn');
+
+            textBox.style.opacity = 0;
+
+            setTimeout(() => {
+                textBox.innerHTML = pages[currentPage];
+                stepCount.innerText = `${currentPage + 1} / ${pages.length}`;
+                
+                if (currentPage === pages.length - 1) {
+                    nextBtn.innerText = "ထပ်ကြည့်ရန် 🔄";
+                } else {
+                    nextBtn.innerText = "ဆက်ဖတ်ရန် နှိပ်ပါ 💖";
+                }
+
+                textBox.style.opacity = 1;
+            }, 300);
+        }
+
+        function nextPage() {
+            currentPage = (currentPage + 1) % pages.length;
+            updateContent();
+        }
+
+        // Initialize first page
+        updateContent();
+    </script>
+</body>
+</html>
